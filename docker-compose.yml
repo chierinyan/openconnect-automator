@@ -1,0 +1,17 @@
+services:
+  openconnect:
+    build: .
+    container_name: openconnect
+    restart: unless-stopped
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - ./credentials.json:/credentials.json
+
+  clash:
+    image: dreamacro/clash-premium:latest
+    container_name: clash
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - ./clash-config:/root/.config/clash/
